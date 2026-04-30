@@ -1,20 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
-import { ServicesSection } from "@/components/ServicesSection";
 import { AboutSection } from "@/components/AboutSection";
+import { ServicesSection } from "@/components/ServicesSection";
+import { IndustriesSection } from "@/components/IndustriesSection";
+import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { WhyUsSection } from "@/components/WhyUsSection";
-import { ContactSection } from "@/components/ContactSection";
+import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "PSCyberCore — Cybersecurity Solutions" },
-      { name: "description", content: "PSCyberCore delivers enterprise-grade cybersecurity solutions to defend your business against evolving digital threats — 24/7." },
-      { property: "og:title", content: "PSCyberCore — Cybersecurity Solutions" },
-      { property: "og:description", content: "Enterprise-grade cybersecurity solutions to defend your business against evolving digital threats." },
+      { title: "PSCyberCore — Automotive IT & Cybersecurity Solutions" },
+      { name: "description", content: "PSCyberCore delivers automotive IT, cybersecurity, fleet technology and digital solutions for modern vehicle businesses." },
+      { property: "og:title", content: "PSCyberCore — Automotive IT & Cybersecurity Solutions" },
+      { property: "og:description", content: "Automotive IT, cybersecurity and digital solutions for modern vehicle businesses." },
     ],
   }),
 });
@@ -24,10 +26,19 @@ function Index() {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <ServicesSection />
       <AboutSection />
+      <ServicesSection />
+      <IndustriesSection />
+      <HowItWorksSection />
       <WhyUsSection />
-      <ContactSection />
+      <CTASection
+        heading="READY TO MODERNIZE YOUR BUSINESS?"
+        subtext="Work with a technology partner that understands automotive operations and digital systems"
+        primaryLabel="Book Consultation"
+        primaryTo="/book-consultation"
+        secondaryLabel="Contact Us"
+        secondaryTo="/contact"
+      />
       <Footer />
     </div>
   );
