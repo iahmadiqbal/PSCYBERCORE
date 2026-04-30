@@ -1,3 +1,5 @@
+import servicesBg from "@/assets/services-bg.jpg";
+
 const services = [
   {
     icon: (
@@ -58,8 +60,15 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section id="services" className="py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="relative py-24 overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${servicesBg})` }}
+      />
+      <div className="absolute inset-0 bg-background/95" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-sm font-semibold tracking-widest uppercase text-cyber-red">Our Services</span>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-foreground">
@@ -74,13 +83,19 @@ export function ServicesSection() {
           {services.map((service) => (
             <div
               key={service.title}
-              className="group relative bg-card rounded-xl p-8 border border-border hover:border-cyber-red/40 transition-all duration-300 hover:shadow-lg hover:shadow-cyber-red/5"
+              className="group relative bg-card/80 backdrop-blur-sm rounded-xl p-8 border border-border hover:border-cyber-red/40 transition-all duration-300 hover:shadow-lg hover:shadow-cyber-red/10 hover:-translate-y-1"
             >
               <div className="w-14 h-14 rounded-lg bg-cyber-red/10 text-cyber-red flex items-center justify-center mb-5 group-hover:bg-cyber-red group-hover:text-cyber-red-foreground transition-colors duration-300">
                 {service.icon}
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-3">{service.title}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
+              <div className="mt-5 flex items-center gap-2 text-cyber-red text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Learn more
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
             </div>
           ))}
         </div>

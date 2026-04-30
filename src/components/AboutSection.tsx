@@ -1,3 +1,5 @@
+import aboutImg from "@/assets/about-team.jpg";
+
 export function AboutSection() {
   return (
     <section id="about" className="py-24 bg-cyber-navy">
@@ -30,23 +32,22 @@ export function AboutSection() {
             </div>
           </div>
 
-          {/* Right side — visual element */}
+          {/* Right side — real image */}
           <div className="relative">
-            <div className="aspect-square rounded-2xl bg-gradient-to-br from-cyber-red/20 to-cyber-navy-foreground/5 border border-cyber-navy-foreground/10 flex items-center justify-center overflow-hidden">
-              {/* Decorative grid */}
-              <div className="absolute inset-0 opacity-10" style={{
-                backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)',
-                backgroundSize: '30px 30px',
-              }} />
-              <div className="relative text-center p-8">
-                <div className="w-24 h-24 mx-auto rounded-full bg-cyber-red/20 border-2 border-cyber-red flex items-center justify-center mb-6 animate-float">
-                  <svg className="w-12 h-12 text-cyber-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-cyber-navy-foreground">Certified & Trusted</h3>
-                <p className="mt-2 text-sm text-cyber-navy-foreground/60">ISO 27001 | SOC 2 | GDPR Compliant</p>
-              </div>
+            <div className="rounded-2xl overflow-hidden border border-cyber-navy-foreground/10 shadow-2xl shadow-cyber-red/10">
+              <img
+                src={aboutImg}
+                alt="PSCyberCore Security Operations Center"
+                loading="lazy"
+                width={1280}
+                height={720}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+            {/* Floating badge */}
+            <div className="absolute -bottom-6 -left-6 bg-cyber-red text-cyber-red-foreground rounded-xl p-5 shadow-lg shadow-cyber-red/30">
+              <div className="text-3xl font-bold">10+</div>
+              <div className="text-sm font-medium opacity-90">Years of<br />Excellence</div>
             </div>
           </div>
         </div>
