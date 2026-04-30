@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "@/assets/logo.png";
 
@@ -35,7 +35,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo = Home button */}
           <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt="PSCyberCore" className="h-16 w-auto" />
+            <img src={logo} alt="PSCyberCore" className="w-28 h-auto" />
           </Link>
 
           {/* Desktop nav */}
@@ -120,7 +120,7 @@ export function Navbar() {
         <div className="md:hidden fixed inset-0 z-40 bg-background flex flex-col">
           <div className="flex items-center justify-between px-4 h-20 border-b border-border">
             <Link to="/" onClick={() => setIsOpen(false)}>
-              <img src={logo} alt="PSCyberCore" className="h-14 w-auto" />
+              <img src={logo} alt="PSCyberCore" className="w-28 h-auto" />
             </Link>
             <button onClick={() => setIsOpen(false)} className="p-2 text-foreground">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

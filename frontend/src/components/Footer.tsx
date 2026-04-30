@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 export function Footer() {
@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo + short text */}
           <div className="md:col-span-1">
-            <img src={logo} alt="PSCyberCore" className="h-16 w-auto brightness-0 invert" />
+            <img src={logo} alt="PSCyberCore" className="w-28 h-auto brightness-0 invert" />
             <p className="mt-4 text-cyber-navy-foreground/60 text-sm leading-relaxed">
               Automotive IT, cybersecurity and digital solutions for modern vehicle businesses.
             </p>
