@@ -6,7 +6,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
-            <img src={logo} alt="PSCyberCore" className="h-10 w-auto brightness-0 invert" />
+            <img src={logo} alt="PSCyberCore" className="h-16 w-auto brightness-0 invert" />
             <p className="mt-4 text-cyber-navy-foreground/60 text-sm leading-relaxed max-w-sm">
               Defending your digital world with advanced cybersecurity solutions. Trust PSCyberCore to keep your business safe.
             </p>
