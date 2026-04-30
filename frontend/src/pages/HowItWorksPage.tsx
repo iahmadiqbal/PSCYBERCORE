@@ -3,7 +3,15 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CTASection } from "@/components/CTASection";
 import heroBg from "@/assets/hero-bg.jpg";
-import aboutImg from "@/assets/about-team.jpg";
+
+const stepImages = [
+  "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80",
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+  "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80",
+  "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80",
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
+  "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80",
+];
 
 const steps = [
   {
@@ -99,11 +107,11 @@ const steps = [
 ];
 
 const whyItWorks = [
-  { icon: "📋", title: "Structured Approach", desc: "Every project follows a clear, proven process from start to finish." },
-  { icon: "🚗", title: "Industry Focus", desc: "Solutions built specifically for automotive and transport businesses." },
-  { icon: "📈", title: "Scalable Systems", desc: "Designed to grow alongside your business needs." },
-  { icon: "🛡️", title: "Secure Design", desc: "Security is built into every stage of the process." },
-  { icon: "🤝", title: "Long-Term Support", desc: "We stay with you beyond deployment for ongoing success." },
+  { title: "Structured Approach", desc: "Every project follows a clear, proven process from start to finish." },
+  { title: "Industry Focus", desc: "Solutions built specifically for automotive and transport businesses." },
+  { title: "Scalable Systems", desc: "Designed to grow alongside your business needs." },
+  { title: "Secure Design", desc: "Security is built into every stage of the process." },
+  { title: "Long-Term Support", desc: "We stay with you beyond deployment for ongoing success." },
 ];
 
 export default function HowItWorksPage() {
@@ -156,13 +164,17 @@ export default function HowItWorksPage() {
             <div key={step.number} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className={index % 2 !== 0 ? "lg:order-2" : ""}>
                 <div className="rounded-2xl overflow-hidden border border-border shadow-xl">
-                  <img src={aboutImg} alt={step.title} className="w-full h-64 object-cover" />
+                  <img
+                    src={stepImages[index]}
+                    alt={step.title}
+                    className="w-full h-64 object-cover"
+                    onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80"; }}
+                  />
                 </div>
               </div>
               <div className={index % 2 !== 0 ? "lg:order-1" : ""}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-full bg-cyber-red text-cyber-red-foreground flex items-center justify-center text-xl font-bold">{step.number}</div>
-                  <span className="text-2xl">{step.icon}</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">Step {step.number}: {step.title}</h2>
                 <ul className="space-y-2">
@@ -188,7 +200,6 @@ export default function HowItWorksPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {whyItWorks.map((item) => (
               <div key={item.title} className="flex flex-col items-center text-center p-6 bg-card rounded-xl border border-border hover:border-cyber-red/40 hover:-translate-y-1 transition-all duration-300">
-                <div className="text-3xl mb-3">{item.icon}</div>
                 <h3 className="text-sm font-semibold text-foreground mb-2">{item.title}</h3>
                 <p className="text-xs text-muted-foreground">{item.desc}</p>
               </div>

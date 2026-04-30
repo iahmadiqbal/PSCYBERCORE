@@ -1,32 +1,31 @@
 import { Link } from "react-router-dom";
-import servicesBg from "@/assets/services-bg.jpg";
 
 const coreSolutions = [
   {
-    image: servicesBg,
+    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80",
     title: "Automotive IT Solutions",
-    icon: "🚗",
+    id: "automotive-it",
   },
   {
-    image: servicesBg,
+    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=600&q=80",
     title: "Fleet Tech & GPS Tracking",
-    icon: "🚚",
+    id: "fleet-technology",
   },
   {
-    image: servicesBg,
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80",
     title: "Cybersecurity Support",
-    icon: "🛡️",
+    id: "cybersecurity",
   },
   {
-    image: servicesBg,
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80",
     title: "Custom Software Development",
-    icon: "💻",
+    id: "custom-software",
   },
 ];
 
 export function ServicesSection() {
   return (
-    <section id="services" className="relative py-24 overflow-hidden bg-background">
+    <section id="services" className="relative py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-sm font-semibold tracking-widest uppercase text-cyber-red">Our Solutions</span>
@@ -38,30 +37,28 @@ export function ServicesSection() {
           </p>
         </div>
 
-        {/* 4 cards in one row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {coreSolutions.map((solution) => (
-            <div
+            <Link
               key={solution.title}
-              className="group relative rounded-xl overflow-hidden border border-border hover:border-cyber-red/40 transition-all duration-300 hover:shadow-lg hover:shadow-cyber-red/10 hover:-translate-y-1 bg-card"
+              to={`/solutions#${solution.id}`}
+              className="group rounded-xl overflow-hidden border border-border hover:border-cyber-red/40 transition-all duration-300 hover:shadow-lg hover:shadow-cyber-red/10 hover:-translate-y-1 bg-card"
             >
               <div className="h-40 overflow-hidden">
                 <img
                   src={solution.image}
                   alt={solution.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80"; }}
                 />
-                <div className="absolute inset-0 bg-cyber-navy/40 group-hover:bg-cyber-navy/20 transition-colors duration-300" />
               </div>
               <div className="p-5">
-                <div className="text-2xl mb-2">{solution.icon}</div>
-                <h3 className="text-base font-semibold text-foreground">{solution.title}</h3>
+                <h3 className="text-base font-semibold text-foreground group-hover:text-cyber-red transition-colors">{solution.title}</h3>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
-        {/* View More Solutions button */}
         <div className="mt-10 text-center">
           <Link
             to="/solutions"

@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import heroBg from "@/assets/hero-bg.jpg";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 const slides = [
   {
-    image: heroBg,
+    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1600&q=80",
     headline: "Automotive IT & Cybersecurity Solutions for Modern Vehicle Businesses",
     subhead: "Secure, automate and optimize your operations with smart technology systems",
   },
   {
-    image: heroBg,
+    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=1600&q=80",
     headline: "Smart Fleet Technology & Data-Driven Operations",
     subhead: "Real-time tracking, reporting and operational visibility for transport businesses",
   },
   {
-    image: heroBg,
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&q=80",
     headline: "Protect Your Business with Advanced Cybersecurity",
     subhead: "Safeguard your systems, data and workflows from modern digital threats",
   },
@@ -31,15 +32,19 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center py-32">
       {/* Background slides */}
-      {slides.map((slide, i) => (
-        <div
-          key={i}
-          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"}`}
-          style={{ backgroundImage: `url(${slide.image})` }}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${slides[current].image})` }}
         />
-      ))}
+      </AnimatePresence>
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-cyber-navy/70" />
@@ -51,29 +56,43 @@ export function HeroSection() {
         }} />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-cyber-navy-foreground leading-tight animate-fade-in-up-delay-1">
-          {slides[current].headline}
-        </h1>
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={current}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight">
+              {slides[current].headline}
+            </h1>
+            <p className="mt-6 text-lg sm:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+              {slides[current].subhead}
+            </p>
+          </motion.div>
+        </AnimatePresence>
 
-        <p className="mt-6 text-lg sm:text-xl text-cyber-navy-foreground/80 max-w-2xl mx-auto leading-relaxed animate-fade-in-up-delay-2">
-          {slides[current].subhead}
-        </p>
-
-        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up-delay-3">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+        >
           <Link
             to="/book-consultation"
-            className="inline-flex items-center justify-center rounded-md bg-cyber-red px-8 py-4 text-base font-semibold text-cyber-red-foreground shadow hover:bg-cyber-red/90 transition-colors animate-pulse-glow"
+            className="inline-flex items-center gap-2 justify-center rounded-md bg-cyber-red px-8 py-4 text-base font-semibold text-white shadow hover:bg-cyber-red/90 transition-colors"
           >
-            Book Consultation
+            Book Consultation <ArrowRight className="w-5 h-5" />
           </Link>
           <Link
             to="/solutions"
-            className="inline-flex items-center justify-center rounded-md border-2 border-cyber-navy-foreground/50 px-8 py-4 text-base font-semibold text-cyber-navy-foreground hover:border-cyber-navy-foreground hover:bg-cyber-navy-foreground/10 transition-colors"
+            className="inline-flex items-center gap-2 justify-center rounded-md border-2 border-white/50 px-8 py-4 text-base font-semibold text-white hover:border-white hover:bg-white/10 transition-colors"
           >
             View Solutions
           </Link>
-        </div>
+        </motion.div>
 
         {/* Slide indicators */}
         <div className="mt-12 flex justify-center gap-2">
@@ -81,13 +100,12 @@ export function HeroSection() {
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${i === current ? "bg-cyber-red w-8" : "bg-cyber-navy-foreground/40"}`}
+              className={`h-2 rounded-full transition-all duration-300 ${i === current ? "bg-cyber-red w-8" : "bg-white/40 w-2"}`}
             />
           ))}
         </div>
       </div>
 
-      {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );

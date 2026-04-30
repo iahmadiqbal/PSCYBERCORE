@@ -151,7 +151,6 @@ export default function BookConsultationPage() {
       <section className="py-12 bg-background">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="bg-card rounded-2xl p-8 border border-border">
-            <div className="text-3xl mb-4">🔒</div>
             <p className="text-muted-foreground leading-relaxed">
               We focus on practical, secure and scalable solutions tailored to your business operations. Your information is kept confidential and used only for consultation purposes.
             </p>

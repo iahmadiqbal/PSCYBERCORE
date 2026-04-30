@@ -3,13 +3,14 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CTASection } from "@/components/CTASection";
 import heroBg from "@/assets/hero-bg.jpg";
-import aboutImg from "@/assets/about-team.jpg";
 
 const industries = [
   {
+    id: "repair-shops",
     icon: "🔧",
     title: "Repair Shops",
     fullTitle: "Repair Shop Technology Solutions",
+    image: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&q=80",
     description: [
       "Digital systems designed for day-to-day repair shop operations",
       "Helps manage customer, vehicle and service records",
@@ -25,9 +26,11 @@ const industries = [
     ],
   },
   {
+    id: "dealerships",
     icon: "🚗",
     title: "Dealerships",
     fullTitle: "Dealership Technology Solutions",
+    image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
     description: [
       "Digital systems for managing vehicle inventory and sales",
       "CRM solutions for customer relationship management",
@@ -43,9 +46,11 @@ const industries = [
     ],
   },
   {
+    id: "fleet-operators",
     icon: "🚚",
     title: "Fleet Operators",
     fullTitle: "Fleet Operator Solutions",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
     description: [
       "Real-time fleet tracking and monitoring systems",
       "Helps manage vehicle usage and driver activity",
@@ -61,9 +66,11 @@ const industries = [
     ],
   },
   {
+    id: "transport-companies",
     icon: "🚛",
     title: "Transport Companies",
     fullTitle: "Transport Company Solutions",
+    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=800&q=80",
     description: [
       "Technology systems for managing transport operations",
       "Improves dispatch planning and coordination",
@@ -79,9 +86,11 @@ const industries = [
     ],
   },
   {
+    id: "logistics-businesses",
     icon: "📦",
     title: "Logistics Businesses",
     fullTitle: "Logistics Business Solutions",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
     description: [
       "Systems designed for managing goods movement and operations",
       "Improves tracking of shipments and inventory",
@@ -97,9 +106,11 @@ const industries = [
     ],
   },
   {
+    id: "mobility-startups",
     icon: "🚀",
     title: "Mobility & Automotive Startups",
     fullTitle: "Mobility & Automotive Startup Solutions",
+    image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80",
     description: [
       "Technology support for new automotive and mobility businesses",
       "Custom software and platform development",
@@ -144,27 +155,38 @@ export default function IndustriesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {industries.map((ind) => (
-              <div key={ind.title} className="flex flex-col items-center text-center p-5 bg-card rounded-xl border border-border hover:border-cyber-red/40 hover:-translate-y-1 transition-all duration-300">
-                <div className="text-2xl mb-2">{ind.icon}</div>
+              <a
+                key={ind.id}
+                href={`#${ind.id}`}
+                className="flex flex-col items-center text-center p-5 bg-card rounded-xl border border-border hover:border-cyber-red/40 hover:-translate-y-1 transition-all duration-300"
+              >
                 <div className="text-sm font-semibold text-foreground">{ind.title}</div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Detailed Industries */}
+      {/* Detailed Industries — each with unique ID and unique image */}
       <section className="py-8 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {industries.map((industry, index) => (
-            <div key={industry.title} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div
+              key={industry.id}
+              id={industry.id}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center scroll-mt-24"
+            >
               <div className={index % 2 !== 0 ? "lg:order-2" : ""}>
                 <div className="rounded-2xl overflow-hidden border border-border shadow-xl">
-                  <img src={aboutImg} alt={industry.fullTitle} className="w-full h-64 object-cover" />
+                  <img
+                    src={industry.image}
+                    alt={industry.fullTitle}
+                    className="w-full h-64 object-cover"
+                    onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&q=80"; }}
+                  />
                 </div>
               </div>
               <div className={index % 2 !== 0 ? "lg:order-1" : ""}>
-                <div className="text-3xl mb-3">{industry.icon}</div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">{industry.fullTitle}</h2>
                 <ul className="space-y-2">
                   {industry.description.map((point) => (

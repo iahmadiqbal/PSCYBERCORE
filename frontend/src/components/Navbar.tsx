@@ -1,159 +1,199 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { ChevronDown, Phone, Mail } from "lucide-react";
 import logo from "@/assets/logo.png";
 
-const solutions = [
-  "Automotive IT Solutions",
-  "Fleet Technology & GPS Tracking",
-  "Cybersecurity Support",
-  "Custom Software Development",
-  "Website Development",
-  "CRM & Booking Systems",
-  "Business Process Automation",
-  "Data Reporting & Dashboards",
-  "Cloud & IT Support",
-  "CAD & 3D Modelling Support",
-];
-
-const industries = [
-  "Repair Shops",
-  "Dealerships",
-  "Fleet Operators",
-  "Transport Companies",
-  "Logistics Businesses",
-  "Mobility & Automotive Startups",
+const solutionsMenu = [
+  {
+    label: "Automotive IT Solutions",
+    id: "automotive-it",
+    links: [
+      "Vehicle-based IT systems",
+      "Customer & vehicle data management",
+      "Workflow automation for garages",
+      "Service tracking & job management",
+    ],
+  },
+  {
+    label: "Fleet Technology & GPS Tracking",
+    id: "fleet-technology",
+    links: [
+      "Real-time GPS vehicle tracking",
+      "Route optimization & dispatch",
+      "Driver activity monitoring",
+      "Fleet performance dashboards",
+    ],
+  },
+  {
+    label: "Cybersecurity Support",
+    id: "cybersecurity",
+    links: [
+      "Vulnerability assessments",
+      "Data protection & encryption",
+      "Threat monitoring & response",
+      "Security policy implementation",
+    ],
+  },
+  {
+    label: "Custom Software Development",
+    id: "custom-software",
+    links: [
+      "Tailored business applications",
+      "Workflow & process automation",
+      "Custom dashboards & reporting",
+      "System integrations & APIs",
+    ],
+  },
+  {
+    label: "Website Development",
+    id: "website-development",
+    links: [
+      "Professional automotive websites",
+      "Mobile-friendly responsive design",
+      "SEO-optimized structure",
+      "Booking & lead generation forms",
+    ],
+  },
+  {
+    label: "CRM & Booking Systems",
+    id: "crm-booking",
+    links: [
+      "Customer relationship management",
+      "Appointment scheduling systems",
+      "Automated reminders",
+      "Service history tracking",
+    ],
+  },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [solutionsOpen, setSolutionsOpen] = useState(false);
-  const [industriesOpen, setIndustriesOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState(solutionsMenu[0]);
+  const navigate = useNavigate();
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLinkClick = (id: string) => {
+    setMenuOpen(false);
+    navigate("/solutions");
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+  };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* Logo = Home button */}
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt="PSCyberCore" className="w-28 h-auto" />
-          </Link>
-
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-6">
-            {/* Solutions Dropdown */}
-            <div className="relative" onMouseEnter={() => setSolutionsOpen(true)} onMouseLeave={() => setSolutionsOpen(false)}>
-              <button className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                Solutions
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+          {/* Left Side: MENU Button and Logo */}
+          <div className="flex items-center">
+            <div className="relative" ref={menuRef}>
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="flex items-center gap-3 bg-[#444] text-white px-6 py-3 text-sm font-bold uppercase tracking-widest hover:bg-[#333] transition-all"
+              >
+                MENU{" "}
+                <ChevronDown className={`transition-transform ${menuOpen ? "rotate-180" : ""}`} />
               </button>
-              {solutionsOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-card border border-border rounded-xl shadow-xl py-2 z-50">
-                  {solutions.map((item) => (
-                    <Link
-                      key={item}
-                      to="/solutions"
-                      className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                    >
-                      {item}
-                    </Link>
-                  ))}
+
+              {/* MEGA MENU - Styled like image_c6467d.png */}
+              {menuOpen && (
+                <div className="fixed left-0 right-0 top-20 bg-white shadow-2xl border-t border-gray-300 w-screen animate-in fade-in slide-in-from-top-2">
+                  <div className="max-w-7xl mx-auto flex min-h-[500px]">
+                    {/* SIDEBAR (Dark Section) */}
+                    <div className="w-80 bg-[#444] flex flex-col">
+                      {solutionsMenu.map((item) => {
+                        const isActive = hoveredItem.id === item.id;
+                        return (
+                          <div key={item.id} className="relative group">
+                            <button
+                              onMouseEnter={() => setHoveredItem(item)}
+                              onClick={() => handleLinkClick(item.id)}
+                              className={`w-full text-left px-6 py-4 text-[15px] border-b border-[#555] transition-all
+                                ${
+                                  isActive
+                                    ? "bg-white text-black font-bold border-l-4 border-cyber-red"
+                                    : "text-white hover:bg-[#555]"
+                                }`}
+                            >
+                              {item.label}
+                            </button>
+                            {/* Focus ring/box look from image */}
+                            {isActive && (
+                              <div className="absolute inset-0 border-2 border-black pointer-events-none"></div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* CONTENT AREA (White Section) */}
+                    <div className="flex-1 bg-white p-12 flex gap-12">
+                      <div className="flex-1">
+                        <h2 className="text-4xl font-bold text-black mb-8 border-b-4 border-cyber-red pb-2 inline-block">
+                          {hoveredItem.label}
+                        </h2>
+
+                        <div className="grid grid-cols-1 gap-4">
+                          {hoveredItem.links.map((link) => (
+                            <button
+                              key={link}
+                              onClick={() => handleLinkClick(hoveredItem.id)}
+                              className="text-left text-lg text-blue-800 underline hover:text-cyber-red transition-colors w-fit"
+                            >
+                              {link}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* "Most Requested" Sidebar from Image */}
+                      <div className="w-72">
+                        <h3 className="text-2xl font-bold text-black mb-6">Most requested</h3>
+                        <ul className="space-y-4">
+                          {["IT Audit", "Security Setup", "Emergency Support"].map((req) => (
+                            <li key={req} className="flex items-start gap-2">
+                              <span className="text-black text-xl">•</span>
+                              <span className="text-blue-800 underline cursor-pointer hover:text-cyber-red">
+                                {req}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
 
-            {/* Industries Dropdown */}
-            <div className="relative" onMouseEnter={() => setIndustriesOpen(true)} onMouseLeave={() => setIndustriesOpen(false)}>
-              <button className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                Industries
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              {industriesOpen && (
-                <div className="absolute top-full left-0 mt-2 w-56 bg-card border border-border rounded-xl shadow-xl py-2 z-50">
-                  {industries.map((item) => (
-                    <Link
-                      key={item}
-                      to="/industries"
-                      className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                    >
-                      {item}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <Link to="/how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">How It Works</Link>
-            <Link to="/about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">About</Link>
-            <Link to="/contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
-
-            <Link
-              to="/book-consultation"
-              className="inline-flex items-center justify-center rounded-md bg-cyber-red px-5 py-2 text-sm font-semibold text-cyber-red-foreground shadow hover:bg-cyber-red/90 transition-colors"
-            >
-              Book Consultation
+            <Link to="/" className="ml-8">
+              <img src={logo} alt="Logo" className="w-28 h-auto" />
             </Link>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-foreground"
-            aria-label="Toggle menu"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+          {/* Right Side: Action Button */}
+          <div className="hidden md:flex items-center gap-6">
+            <Link
+              to="/book-consultation"
+              className="bg-[#26374a] text-white px-6 py-2 text-sm font-bold uppercase hover:bg-[#1a2533]"
+            >
+              Consultation
+            </Link>
+          </div>
         </div>
       </div>
-
-      {/* Mobile full screen overlay */}
-      {isOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-background flex flex-col">
-          <div className="flex items-center justify-between px-4 h-20 border-b border-border">
-            <Link to="/" onClick={() => setIsOpen(false)}>
-              <img src={logo} alt="PSCyberCore" className="w-28 h-auto" />
-            </Link>
-            <button onClick={() => setIsOpen(false)} className="p-2 text-foreground">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-4">
-            <Link to="/solutions" onClick={() => setIsOpen(false)} className="text-lg font-medium text-foreground hover:text-cyber-red transition-colors py-2 border-b border-border">Solutions</Link>
-            <Link to="/industries" onClick={() => setIsOpen(false)} className="text-lg font-medium text-foreground hover:text-cyber-red transition-colors py-2 border-b border-border">Industries</Link>
-            <Link to="/how-it-works" onClick={() => setIsOpen(false)} className="text-lg font-medium text-foreground hover:text-cyber-red transition-colors py-2 border-b border-border">How It Works</Link>
-            <Link to="/about" onClick={() => setIsOpen(false)} className="text-lg font-medium text-foreground hover:text-cyber-red transition-colors py-2 border-b border-border">About</Link>
-            <Link to="/contact" onClick={() => setIsOpen(false)} className="text-lg font-medium text-foreground hover:text-cyber-red transition-colors py-2 border-b border-border">Contact</Link>
-          </div>
-
-          <div className="px-6 py-6 border-t border-border flex flex-col gap-3">
-            <a href="tel:+18258076307" className="flex items-center gap-3 text-base font-medium text-foreground hover:text-cyber-red transition-colors">
-              <span>📞</span> Talk to an Expert
-            </a>
-            <a href="mailto:info@pscybercore.com" className="flex items-center gap-3 text-base font-medium text-foreground hover:text-cyber-red transition-colors">
-              <span>📧</span> info@pscybercore.com
-            </a>
-            <Link
-              to="/book-consultation"
-              onClick={() => setIsOpen(false)}
-              className="mt-2 inline-flex items-center justify-center rounded-md bg-cyber-red px-5 py-3 text-sm font-semibold text-cyber-red-foreground shadow hover:bg-cyber-red/90 transition-colors"
-            >
-              Book Consultation
-            </Link>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }

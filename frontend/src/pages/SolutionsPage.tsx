@@ -3,12 +3,13 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CTASection } from "@/components/CTASection";
 import heroBg from "@/assets/hero-bg.jpg";
-import servicesBg from "@/assets/services-bg.jpg";
 
 const solutions = [
   {
+    id: "automotive-it",
     icon: "🚗",
     title: "Automotive IT Solutions",
+    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80",
     description: [
       "Designed specifically for vehicle-based businesses and operations",
       "Helps organize customer, vehicle and service data",
@@ -24,8 +25,10 @@ const solutions = [
     ],
   },
   {
+    id: "fleet-technology",
     icon: "🚚",
     title: "Fleet Technology & GPS Tracking",
+    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=800&q=80",
     description: [
       "Real-time vehicle tracking and monitoring systems",
       "Helps manage fleet movement, routes and driver activity",
@@ -41,8 +44,10 @@ const solutions = [
     ],
   },
   {
+    id: "cybersecurity",
     icon: "🛡️",
     title: "Cybersecurity Support",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
     description: [
       "Protects business systems, data and digital infrastructure",
       "Identifies vulnerabilities in existing IT systems",
@@ -58,8 +63,10 @@ const solutions = [
     ],
   },
   {
+    id: "custom-software",
     icon: "💻",
     title: "Custom Software Development",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80",
     description: [
       "Tailored software solutions for specific business needs",
       "Built around real automotive workflows and operations",
@@ -75,8 +82,10 @@ const solutions = [
     ],
   },
   {
+    id: "website-development",
     icon: "🌐",
     title: "Website Development",
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
     description: [
       "Professional websites designed for automotive businesses",
       "Mobile-friendly and responsive design",
@@ -92,8 +101,10 @@ const solutions = [
     ],
   },
   {
+    id: "crm-booking",
     icon: "📊",
     title: "CRM & Booking Systems",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
     description: [
       "Customer relationship management system setup",
       "Centralized customer and vehicle data storage",
@@ -109,8 +120,10 @@ const solutions = [
     ],
   },
   {
+    id: "automation",
     icon: "⚙️",
     title: "Business Process Automation",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
     description: [
       "Automates repetitive business tasks",
       "Reduces manual workload and human error",
@@ -126,8 +139,10 @@ const solutions = [
     ],
   },
   {
+    id: "data-reporting",
     icon: "📈",
     title: "Data Reporting & Dashboards",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
     description: [
       "Real-time business performance dashboards",
       "Data visualization for better decision making",
@@ -143,8 +158,10 @@ const solutions = [
     ],
   },
   {
+    id: "cloud-it",
     icon: "☁️",
     title: "Cloud Systems & IT Support",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80",
     description: [
       "Cloud setup for business applications and data",
       "Secure storage and system access",
@@ -160,8 +177,10 @@ const solutions = [
     ],
   },
   {
+    id: "cad-3d",
     icon: "🧩",
     title: "CAD Drafting & 3D Modelling Support",
+    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80",
     description: [
       "Non-regulated technical drafting support",
       "2D and 3D modelling for conceptual documentation",
@@ -179,16 +198,16 @@ const solutions = [
 ];
 
 const overviewCards = [
-  { icon: "🚗", title: "Automotive IT", desc: "IT systems for vehicle businesses" },
-  { icon: "🚚", title: "Fleet Technology", desc: "GPS tracking & fleet management" },
-  { icon: "🛡️", title: "Cybersecurity", desc: "Protect your digital infrastructure" },
-  { icon: "💻", title: "Software Development", desc: "Custom software solutions" },
-  { icon: "🌐", title: "Websites", desc: "Professional web presence" },
-  { icon: "📊", title: "CRM Systems", desc: "Customer & booking management" },
-  { icon: "⚙️", title: "Automation", desc: "Streamline business workflows" },
-  { icon: "📈", title: "Data Reporting", desc: "Dashboards & analytics" },
-  { icon: "☁️", title: "Cloud & IT", desc: "Cloud infrastructure & support" },
-  { icon: "🧩", title: "CAD & 3D Support", desc: "Technical drafting & modelling" },
+  { title: "Automotive IT", desc: "IT systems for vehicle businesses" },
+  { title: "Fleet Technology", desc: "GPS tracking & fleet management" },
+  { title: "Cybersecurity", desc: "Protect your digital infrastructure" },
+  { title: "Software Development", desc: "Custom software solutions" },
+  { title: "Websites", desc: "Professional web presence" },
+  { title: "CRM Systems", desc: "Customer & booking management" },
+  { title: "Automation", desc: "Streamline business workflows" },
+  { title: "Data Reporting", desc: "Dashboards & analytics" },
+  { title: "Cloud & IT", desc: "Cloud infrastructure & support" },
+  { title: "CAD & 3D Support", desc: "Technical drafting & modelling" },
 ];
 
 export default function SolutionsPage() {
@@ -220,7 +239,6 @@ export default function SolutionsPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {overviewCards.map((card) => (
               <div key={card.title} className="flex flex-col items-center text-center p-5 bg-card rounded-xl border border-border hover:border-cyber-red/40 hover:-translate-y-1 transition-all duration-300">
-                <div className="text-2xl mb-2">{card.icon}</div>
                 <div className="text-sm font-semibold text-foreground">{card.title}</div>
                 <div className="text-xs text-muted-foreground mt-1">{card.desc}</div>
               </div>
@@ -229,18 +247,26 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      {/* Detailed Solutions */}
+      {/* Detailed Solutions — each with unique ID and unique image */}
       <section className="py-8 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {solutions.map((solution, index) => (
-            <div key={solution.title} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div
+              key={solution.id}
+              id={solution.id}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center scroll-mt-24"
+            >
               <div className={index % 2 !== 0 ? "lg:order-2" : ""}>
                 <div className="rounded-2xl overflow-hidden border border-border shadow-xl">
-                  <img src={servicesBg} alt={solution.title} className="w-full h-64 object-cover" />
+                  <img
+                    src={solution.image}
+                    alt={solution.title}
+                    className="w-full h-64 object-cover"
+                    onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80"; }}
+                  />
                 </div>
               </div>
               <div className={index % 2 !== 0 ? "lg:order-1" : ""}>
-                <div className="text-3xl mb-3">{solution.icon}</div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">{solution.title}</h2>
                 <ul className="space-y-2">
                   {solution.description.map((point) => (

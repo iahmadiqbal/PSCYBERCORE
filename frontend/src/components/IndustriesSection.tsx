@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
 const industries = [
-  { icon: "🔧", name: "Repair Shops" },
-  { icon: "🚗", name: "Dealerships" },
-  { icon: "🚚", name: "Fleet Operators" },
-  { icon: "🚛", name: "Transport Companies" },
-  { icon: "📦", name: "Logistics Businesses" },
-  { icon: "🚀", name: "Mobility & Automotive Startups" },
+  { name: "Repair Shops" },
+  { name: "Dealerships" },
+  { name: "Fleet Operators" },
+  { name: "Transport Companies" },
+  { name: "Logistics Businesses" },
+  { name: "Mobility & Automotive Startups" },
 ];
 
 export function IndustriesSection() {
@@ -22,7 +22,6 @@ export function IndustriesSection() {
             We design tailored systems for vehicle-dependent businesses across multiple automotive sectors.
           </p>
         </div>
-
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {industries.map((industry) => (
             <Link
@@ -30,7 +29,6 @@ export function IndustriesSection() {
               to="/industries"
               className="group flex flex-col items-center text-center p-6 bg-card rounded-xl border border-border hover:border-cyber-red/40 hover:shadow-lg hover:shadow-cyber-red/10 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="text-3xl mb-3">{industry.icon}</div>
               <div className="text-sm font-semibold text-foreground group-hover:text-cyber-red transition-colors">{industry.name}</div>
             </Link>
           ))}

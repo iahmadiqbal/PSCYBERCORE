@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CTASection } from "@/components/CTASection";
+import { AnimatedSection } from "@/components/AnimatedSection";
 import heroBg from "@/assets/hero-bg.jpg";
-import aboutImg from "@/assets/about-team.jpg";
-import whyUsImg from "@/assets/why-us.jpg";
 
 const values = [
   "Practical Solutions Over Complexity",
@@ -15,11 +14,11 @@ const values = [
 ];
 
 const whyUs = [
-  { icon: "🚗", title: "Automotive Expertise", desc: "Built specifically for vehicle-based businesses" },
-  { icon: "⚙️", title: "Practical Systems", desc: "Solutions designed for real-world usage" },
-  { icon: "🛡️", title: "Cybersecurity Focus", desc: "Strong focus on protecting systems and data" },
-  { icon: "📈", title: "Scalable Solutions", desc: "Systems that grow with your business" },
-  { icon: "📊", title: "Data Driven", desc: "Better insights through structured data" },
+  { title: "Automotive Expertise", desc: "Built specifically for vehicle-based businesses" },
+  { title: "Practical Systems", desc: "Solutions designed for real-world usage" },
+  { title: "Cybersecurity Focus", desc: "Strong focus on protecting systems and data" },
+  { title: "Scalable Solutions", desc: "Systems that grow with your business" },
+  { title: "Data Driven", desc: "Better insights through structured data" },
 ];
 
 export default function AboutPage() {
@@ -49,10 +48,12 @@ export default function AboutPage() {
       <section className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="rounded-2xl overflow-hidden border border-border shadow-xl">
-              <img src={aboutImg} alt="Office / Team Collaboration / Systems Setup" className="w-full h-auto object-cover" />
-            </div>
-            <div>
+            <AnimatedSection direction="left">
+              <div className="rounded-2xl overflow-hidden border border-border shadow-xl">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="PSCyberCore Team" className="w-full h-auto object-cover" />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={0.2}>
               <span className="text-sm font-semibold tracking-widest uppercase text-cyber-red">Who We Are</span>
               <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-foreground">Who We Are</h2>
               <p className="mt-6 text-muted-foreground leading-relaxed">
@@ -61,7 +62,7 @@ export default function AboutPage() {
               <p className="mt-4 text-muted-foreground leading-relaxed">
                 Our approach combines real-world understanding of automotive workflows with modern digital tools, allowing businesses to move from manual processes to structured, data-driven operations.
               </p>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -71,17 +72,14 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-card rounded-xl p-8 border border-border">
-              <div className="text-3xl mb-4">🎯</div>
               <h3 className="text-xl font-bold text-foreground mb-4">Mission</h3>
               <p className="text-muted-foreground leading-relaxed">To deliver practical, secure and scalable technology solutions that improve operations for automotive and transport businesses.</p>
             </div>
             <div className="bg-card rounded-xl p-8 border border-border">
-              <div className="text-3xl mb-4">🔭</div>
               <h3 className="text-xl font-bold text-foreground mb-4">Vision</h3>
               <p className="text-muted-foreground leading-relaxed">To become a trusted technology partner for vehicle-based businesses seeking digital transformation, operational clarity and long-term growth.</p>
             </div>
             <div className="bg-card rounded-xl p-8 border border-border">
-              <div className="text-3xl mb-4">💎</div>
               <h3 className="text-xl font-bold text-foreground mb-4">Values</h3>
               <ul className="space-y-2">
                 {values.map((v) => (
@@ -105,9 +103,9 @@ export default function AboutPage() {
               <p className="mt-6 text-muted-foreground leading-relaxed">We provide a wide range of technology and digital services designed specifically for automotive and transport businesses. Our solutions include IT systems, cybersecurity support, fleet technology, CRM platforms, workflow automation, custom software development and data reporting systems.</p>
               <p className="mt-4 text-muted-foreground leading-relaxed">We focus on building systems that are easy to use, scalable and aligned with real business operations, ensuring that technology becomes a practical asset rather than a complexity.</p>
             </div>
-            <div className="rounded-2xl overflow-hidden border border-border shadow-xl">
-              <img src={whyUsImg} alt="Dashboard + Systems + Fleet + Software Visual" className="w-full h-auto object-cover" />
-            </div>
+            <AnimatedSection direction="right" delay={0.2}>
+              <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80" alt="Dashboard + Systems + Fleet + Software Visual" className="w-full h-auto object-cover" />
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -132,7 +130,6 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {whyUs.map((item) => (
               <div key={item.title} className="flex flex-col items-center text-center p-6 bg-card rounded-xl border border-border hover:border-cyber-red/40 hover:-translate-y-1 transition-all duration-300">
-                <div className="text-3xl mb-3">{item.icon}</div>
                 <h3 className="text-sm font-semibold text-foreground mb-2">{item.title}</h3>
                 <p className="text-xs text-muted-foreground">{item.desc}</p>
               </div>
