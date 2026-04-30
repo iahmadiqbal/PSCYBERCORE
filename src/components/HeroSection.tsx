@@ -10,7 +10,7 @@ export function HeroSection() {
         style={{ backgroundImage: `url(${heroBg})` }}
       />
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-cyber-navy/80" />
+      <div className="absolute inset-0 bg-cyber-navy/60" />
 
       {/* Scan line effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
