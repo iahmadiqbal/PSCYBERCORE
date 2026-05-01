@@ -104,7 +104,8 @@ export default function AboutPage() {
               <p className="mt-4 text-muted-foreground leading-relaxed">We focus on building systems that are easy to use, scalable and aligned with real business operations, ensuring that technology becomes a practical asset rather than a complexity.</p>
             </div>
             <AnimatedSection direction="right" delay={0.2}>
-              <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80" alt="Dashboard + Systems + Fleet + Software Visual" className="w-full h-auto object-cover" />
+              {/* What We Do — dashboard + systems visual */}
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="Dashboard and Systems" className="w-full h-auto object-cover rounded-2xl" />
             </AnimatedSection>
           </div>
         </div>

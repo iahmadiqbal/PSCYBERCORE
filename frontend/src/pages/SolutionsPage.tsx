@@ -9,7 +9,8 @@ const solutions = [
     id: "automotive-it",
     icon: "🚗",
     title: "Automotive IT Solutions",
-    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80",
+    // Garage/workshop with digital tablet — IT in automotive setting
+    image: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&q=80",
     description: [
       "Designed specifically for vehicle-based businesses and operations",
       "Helps organize customer, vehicle and service data",
@@ -28,7 +29,8 @@ const solutions = [
     id: "fleet-technology",
     icon: "🚚",
     title: "Fleet Technology & GPS Tracking",
-    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=800&q=80",
+    // GPS map tracking on screen — fleet dashboard
+    image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80",
     description: [
       "Real-time vehicle tracking and monitoring systems",
       "Helps manage fleet movement, routes and driver activity",
@@ -47,7 +49,8 @@ const solutions = [
     id: "cybersecurity",
     icon: "🛡️",
     title: "Cybersecurity Support",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    // Cybersecurity shield / lock on digital interface
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
     description: [
       "Protects business systems, data and digital infrastructure",
       "Identifies vulnerabilities in existing IT systems",
@@ -66,7 +69,8 @@ const solutions = [
     id: "custom-software",
     icon: "💻",
     title: "Custom Software Development",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80",
+    // Developer coding on multiple screens
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
     description: [
       "Tailored software solutions for specific business needs",
       "Built around real automotive workflows and operations",
@@ -85,7 +89,8 @@ const solutions = [
     id: "website-development",
     icon: "🌐",
     title: "Website Development",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
+    // Laptop showing responsive website design
+    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
     description: [
       "Professional websites designed for automotive businesses",
       "Mobile-friendly and responsive design",
@@ -104,7 +109,8 @@ const solutions = [
     id: "crm-booking",
     icon: "📊",
     title: "CRM & Booking Systems",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
+    // CRM dashboard with customer data on screen
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
     description: [
       "Customer relationship management system setup",
       "Centralized customer and vehicle data storage",
@@ -123,7 +129,8 @@ const solutions = [
     id: "automation",
     icon: "⚙️",
     title: "Business Process Automation",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
+    // Workflow automation — gears and process flow
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
     description: [
       "Automates repetitive business tasks",
       "Reduces manual workload and human error",
@@ -142,7 +149,8 @@ const solutions = [
     id: "data-reporting",
     icon: "📈",
     title: "Data Reporting & Dashboards",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    // Analytics dashboard with charts and graphs
+    image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80",
     description: [
       "Real-time business performance dashboards",
       "Data visualization for better decision making",
@@ -161,7 +169,8 @@ const solutions = [
     id: "cloud-it",
     icon: "☁️",
     title: "Cloud Systems & IT Support",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80",
+    // Cloud server infrastructure / data center
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
     description: [
       "Cloud setup for business applications and data",
       "Secure storage and system access",
@@ -180,7 +189,8 @@ const solutions = [
     id: "cad-3d",
     icon: "🧩",
     title: "CAD Drafting & 3D Modelling Support",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80",
+    // CAD 3D model on screen — technical design
+    image: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=800&q=80",
     description: [
       "Non-regulated technical drafting support",
       "2D and 3D modelling for conceptual documentation",

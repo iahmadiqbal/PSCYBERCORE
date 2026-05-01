@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Phone, Mail, Globe, MapPin } from "lucide-react";
 import logo from "@/assets/logo.png";
 
@@ -11,33 +11,74 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-amber-50 py-16 border-t border-amber-100">
+    <footer
+      style={{ background: "#e8eaf0", borderTop: "4px solid #c0392b" }}
+      className="py-16"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          {/* Logo + short text */}
+
+          {/* Logo + tagline */}
           <div className="md:col-span-1">
-            <img src={logo} alt="PSCyberCore" className="w-36 h-auto" />
-            <p className="mt-4 text-gray-600 text-sm leading-relaxed">
+            {/* Logo with red glow — no bg, just drop-shadow in brand red */}
+            <img
+              src={logo}
+              alt="PSCyberCore"
+              className="h-20 w-auto object-contain"
+            />
+            <p className="mt-5 text-sm leading-relaxed text-gray-600">
               Automotive IT, cybersecurity and digital solutions for modern vehicle businesses.
             </p>
+
+            {/* Social icons */}
+            <div className="mt-5 flex items-center gap-3">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 transition-all hover:border-cyber-red hover:bg-cyber-red hover:text-white"
+              >
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 transition-all hover:border-cyber-red hover:bg-cyber-red hover:text-white"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 transition-all hover:border-cyber-red hover:bg-cyber-red hover:text-white"
+              >
+                <Twitter className="h-4 w-4" />
+              </a>
+            </div>
           </div>
 
-          {/* Quick Links — includes Home */}
+          {/* Quick Links */}
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Quick Links</h4>
+            <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-cyber-red">
+              Quick Links
+            </h4>
             <ul className="space-y-2.5">
               {[
                 { label: "Home", to: "/" },
                 { label: "Solutions", to: "/solutions" },
                 { label: "Industries", to: "/industries" },
-                { label: "How It Works", to: "/how-it-works" },
                 { label: "About", to: "/about" },
                 { label: "Contact", to: "/contact" },
               ].map((item) => (
                 <li key={item.label}>
                   <button
                     onClick={() => handleNavClick(item.to)}
-                    className="text-sm text-gray-600 hover:text-cyber-red transition-colors text-left"
+                    className="text-sm text-gray-600 transition-colors hover:text-cyber-red text-left"
                   >
                     {item.label}
                   </button>
@@ -48,13 +89,21 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Services</h4>
+            <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-cyber-red">
+              Services
+            </h4>
             <ul className="space-y-2.5">
-              {["IT Solutions", "Fleet Tech", "Cybersecurity", "CRM", "Automation"].map((item) => (
+              {[
+                "IT Solutions",
+                "Fleet Tech",
+                "Cybersecurity",
+                "CRM & Booking",
+                "Automation",
+              ].map((item) => (
                 <li key={item}>
                   <button
                     onClick={() => handleNavClick("/solutions")}
-                    className="text-sm text-gray-600 hover:text-cyber-red transition-colors text-left"
+                    className="text-sm text-gray-600 transition-colors hover:text-cyber-red text-left"
                   >
                     {item}
                   </button>
@@ -65,62 +114,49 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Contact</h4>
+            <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-cyber-red">
+              Contact
+            </h4>
             <ul className="space-y-3">
               <li>
-                <a href="tel:+18258076307" className="text-sm text-gray-600 hover:text-cyber-red transition-colors flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-cyber-red flex-shrink-0" /> +1 825 807 6307
+                <a
+                  href="tel:+18258076307"
+                  className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-cyber-red"
+                >
+                  <Phone className="h-4 w-4 shrink-0 text-cyber-red" />
+                  +1 825 807 6307
                 </a>
               </li>
               <li>
-                <a href="mailto:info@pscybercore.com" className="text-sm text-gray-600 hover:text-cyber-red transition-colors flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-cyber-red flex-shrink-0" /> info@pscybercore.com
+                <a
+                  href="mailto:info@pscybercore.com"
+                  className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-cyber-red"
+                >
+                  <Mail className="h-4 w-4 shrink-0 text-cyber-red" />
+                  info@pscybercore.com
                 </a>
               </li>
               <li>
-                <a href="https://www.pscybercore.com" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 hover:text-cyber-red transition-colors flex items-center gap-2">
-                  <Globe className="w-4 h-4 text-cyber-red flex-shrink-0" /> www.pscybercore.com
+                <a
+                  href="https://www.pscybercore.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-cyber-red"
+                >
+                  <Globe className="h-4 w-4 shrink-0 text-cyber-red" />
+                  www.pscybercore.com
                 </a>
               </li>
-              <li className="text-sm text-gray-600 flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-cyber-red flex-shrink-0 mt-0.5" /> 219-1210 20 Ave SE, Calgary, AB, Canada T2G 1M8
+              <li className="flex items-start gap-2 text-sm text-gray-600">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-cyber-red" />
+                219-1210 20 Ave SE, Calgary, AB, Canada T2G 1M8
               </li>
             </ul>
-
-            {/* Social icons — lucide-react, redirect to sample pages */}
-            <div className="mt-5 flex items-center gap-3">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-cyber-red hover:text-white transition-colors"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-cyber-red hover:text-white transition-colors"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-cyber-red hover:text-white transition-colors"
-              >
-                <Twitter className="w-4 h-4" />
-              </a>
-            </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-amber-100 text-center">
+        {/* Bottom bar */}
+        <div className="mt-12 border-t border-gray-300 pt-8 text-center">
           <p className="text-xs text-gray-500">
             &copy; {new Date().getFullYear()} PSCyberCore. All rights reserved.
           </p>

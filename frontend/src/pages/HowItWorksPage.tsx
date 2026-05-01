@@ -5,11 +5,17 @@ import { CTASection } from "@/components/CTASection";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const stepImages = [
+  // Step 1 Consultation — business meeting / client discussion
   "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80",
-  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+  // Step 2 Analysis — data analysis / system review on screens
+  "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80",
+  // Step 3 System Design — architecture diagram / whiteboard planning
   "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80",
-  "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80",
-  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
+  // Step 4 Development — developer writing code on laptop
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+  // Step 5 Deployment — server launch / cloud deployment
+  "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+  // Step 6 Support — support team monitoring dashboard
   "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80",
 ];
 

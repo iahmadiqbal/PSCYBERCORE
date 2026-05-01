@@ -5,17 +5,20 @@ import { ArrowRight } from "lucide-react";
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1600&q=80",
+    // Slide 1: Automotive IT — car dashboard + digital systems
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80",
     headline: "Automotive IT & Cybersecurity Solutions for Modern Vehicle Businesses",
     subhead: "Secure, automate and optimize your operations with smart technology systems",
   },
   {
-    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=1600&q=80",
+    // Slide 2: Fleet GPS tracking — trucks on highway
+    image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=80",
     headline: "Smart Fleet Technology & Data-Driven Operations",
     subhead: "Real-time tracking, reporting and operational visibility for transport businesses",
   },
   {
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&q=80",
+    // Slide 3: Cybersecurity — lock/shield on digital screen
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1600&q=80",
     headline: "Protect Your Business with Advanced Cybersecurity",
     subhead: "Safeguard your systems, data and workflows from modern digital threats",
   },
@@ -32,7 +35,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center py-32">
+    <section className="relative min-h-screen flex items-center justify-center">
       {/* Background slides */}
       <AnimatePresence mode="wait">
         <motion.div

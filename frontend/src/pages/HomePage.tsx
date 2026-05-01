@@ -10,22 +10,26 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 const coreSolutions = [
   {
     title: "Automotive IT Solutions",
-    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80",
+    // Mechanic with tablet in garage — automotive IT
+    image: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=600&q=80",
     id: "automotive-it",
   },
   {
     title: "Fleet Tech & GPS Tracking",
-    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=600&q=80",
+    // Trucks on highway — fleet operations
+    image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600&q=80",
     id: "fleet-technology",
   },
   {
     title: "Cybersecurity Support",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80",
+    // Cybersecurity lock on digital screen
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80",
     id: "cybersecurity",
   },
   {
-    title: "Custom Software Dev",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80",
+    title: "Custom Software Development",
+    // Developer coding on laptop
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80",
     id: "custom-software",
   },
 ];
@@ -75,7 +79,6 @@ export default function HomePage() {
               </div>
             </AnimatedSection>
             <AnimatedSection direction="right" delay={0.2}>
-              <span className="text-sm font-semibold tracking-widest uppercase text-cyber-red">About PSCyberCore</span>
               <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-foreground">
                 Technology Built for Automotive & Transport Businesses
               </h2>
@@ -102,9 +105,7 @@ export default function HomePage() {
       <section id="services" className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up" className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-sm font-semibold tracking-widest uppercase text-cyber-red">Our Solutions</span>
             <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-foreground">Core Solutions</h2>
-            <p className="mt-4 text-muted-foreground">End-to-end technology solutions for your automotive business.</p>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -145,7 +146,6 @@ export default function HomePage() {
       <section id="industries" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up" className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-sm font-semibold tracking-widest uppercase text-cyber-red">Industries We Serve</span>
             <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-foreground">Industries We Serve</h2>
             <p className="mt-4 text-muted-foreground">
               We design tailored systems for vehicle-dependent businesses across multiple automotive sectors.
@@ -171,7 +171,6 @@ export default function HomePage() {
       <section id="how-it-works" className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up" className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-sm font-semibold tracking-widest uppercase text-cyber-red">Our Process</span>
             <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-foreground">How It Works</h2>
             <p className="mt-4 text-muted-foreground">
               We follow a structured approach to understand your operations, build the right system, and provide ongoing support for long-term efficiency.

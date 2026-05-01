@@ -10,7 +10,8 @@ const industries = [
     icon: "🔧",
     title: "Repair Shops",
     fullTitle: "Repair Shop Technology Solutions",
-    image: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=800&q=80",
+    // Mechanic working in auto repair workshop
+    image: "https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&q=80",
     description: [
       "Digital systems designed for day-to-day repair shop operations",
       "Helps manage customer, vehicle and service records",
@@ -30,6 +31,7 @@ const industries = [
     icon: "🚗",
     title: "Dealerships",
     fullTitle: "Dealership Technology Solutions",
+    // Car dealership showroom with vehicles
     image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
     description: [
       "Digital systems for managing vehicle inventory and sales",
@@ -50,7 +52,8 @@ const industries = [
     icon: "🚚",
     title: "Fleet Operators",
     fullTitle: "Fleet Operator Solutions",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    // Fleet of trucks parked — fleet operations
+    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=800&q=80",
     description: [
       "Real-time fleet tracking and monitoring systems",
       "Helps manage vehicle usage and driver activity",
@@ -70,7 +73,8 @@ const industries = [
     icon: "🚛",
     title: "Transport Companies",
     fullTitle: "Transport Company Solutions",
-    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=800&q=80",
+    // Semi trucks on highway — transport operations
+    image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80",
     description: [
       "Technology systems for managing transport operations",
       "Improves dispatch planning and coordination",
@@ -90,7 +94,8 @@ const industries = [
     icon: "📦",
     title: "Logistics Businesses",
     fullTitle: "Logistics Business Solutions",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
+    // Warehouse with shelves and logistics operations
+    image: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=80",
     description: [
       "Systems designed for managing goods movement and operations",
       "Improves tracking of shipments and inventory",
@@ -110,6 +115,7 @@ const industries = [
     icon: "🚀",
     title: "Mobility & Automotive Startups",
     fullTitle: "Mobility & Automotive Startup Solutions",
+    // Modern startup office with tech team
     image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80",
     description: [
       "Technology support for new automotive and mobility businesses",
