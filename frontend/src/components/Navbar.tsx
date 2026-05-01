@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   ChevronDown,
   ChevronRight,
@@ -6,7 +6,7 @@ import {
   Phone,
   X,
 } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type RefObject } from "react";
 import logo from "@/assets/logo.png";
 
 // ─── Mega Menu Data ────────────────────────────────────────────────────────
@@ -123,9 +123,11 @@ const megaMenuCategories: MenuCategory[] = [
 function MegaMenu({
   onClose,
   headerHeight,
+  menuRef,
 }: {
   onClose: () => void;
   headerHeight: number;
+  menuRef: RefObject<HTMLDivElement | null>;
 }) {
   const [activeCategory, setActiveCategory] = useState<MenuCategory>(megaMenuCategories[0]);
   const navigate = useNavigate();
@@ -149,12 +151,13 @@ function MegaMenu({
 
   return (
     <div
+      ref={menuRef}
       className="fixed left-0 right-0 z-50 border-t-2 border-cyber-red shadow-2xl"
       style={{ top: headerHeight }}
     >
-      <div className="flex" style={{ minHeight: 340 }}>
+      <div className="flex" style={{ height: 340 }}>
         {/* Left sidebar — dark */}
-        <div className="flex flex-col bg-[#1a1a2e]" style={{ minWidth: 260, width: 260 }}>
+        <div className="flex flex-col bg-[#1a1a2e] overflow-hidden" style={{ minWidth: 260, width: 260 }}>
           {megaMenuCategories.map((cat) => (
             <button
               key={cat.id}
@@ -175,7 +178,7 @@ function MegaMenu({
         </div>
 
         {/* Right panel — white */}
-        <div className="flex flex-1 gap-16 bg-white px-10 py-7">
+        <div className="flex flex-1 gap-16 bg-white px-10 py-7 overflow-hidden">
           {/* Left col: category title + links */}
           <div style={{ minWidth: 240 }}>
             <button
@@ -249,8 +252,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col bg-white"
-      style={{ overflowY: "auto" }}
+      className="fixed inset-0 z-50 flex flex-col bg-white overflow-hidden"
     >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
@@ -267,7 +269,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-4 py-2">
+      <nav className="flex-1 px-4 py-2 overflow-y-auto">
         {megaMenuCategories.map((cat) => (
           <div key={cat.id} className="border-b border-gray-100">
             <button
@@ -333,6 +335,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(80);
   const headerRef = useRef<HTMLElement>(null);
+  const megaMenuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   // Keep header height in sync for mega menu positioning
@@ -347,11 +350,14 @@ export function Navbar() {
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  // Close mega menu on outside click
+  // Close mega menu on outside click — check both header and mega menu panel
   useEffect(() => {
     if (!megaOpen) return;
     function handleOutsideClick(e: MouseEvent) {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      const inHeader = headerRef.current?.contains(target);
+      const inMegaMenu = megaMenuRef.current?.contains(target);
+      if (!inHeader && !inMegaMenu) {
         setMegaOpen(false);
       }
     }
@@ -452,6 +458,7 @@ export function Navbar() {
           <MegaMenu
             onClose={() => setMegaOpen(false)}
             headerHeight={headerHeight}
+            menuRef={megaMenuRef}
           />
         )}
       </header>
