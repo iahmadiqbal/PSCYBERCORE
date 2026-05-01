@@ -7,10 +7,9 @@ import {
   X,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
 import logo from "@/assets/logo.png";
 
-// ─── Mega Menu Data ────────────────────────────────────────────────────────
+// ─── Types ─────────────────────────────────────────────────────────────────
 type MenuLink = { label: string; to: string; hash?: string };
 type MenuCategory = {
   id: string;
@@ -20,6 +19,7 @@ type MenuCategory = {
   mostRequested: MenuLink[];
 };
 
+// ─── Data ──────────────────────────────────────────────────────────────────
 const megaMenuCategories: MenuCategory[] = [
   {
     id: "solutions",
@@ -121,17 +121,7 @@ const megaMenuCategories: MenuCategory[] = [
 ];
 
 // ─── Mega Menu ─────────────────────────────────────────────────────────────
-function MegaMenu({
-  onClose,
-  onMouseEnter,
-  onMouseLeave,
-  headerHeight,
-}: {
-  onClose: () => void;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
-  headerHeight: number;
-}) {
+function MegaMenu({ onClose }: { onClose: () => void }) {
   const [activeCategory, setActiveCategory] = useState<MenuCategory>(megaMenuCategories[0]);
   const navigate = useNavigate();
 
@@ -152,15 +142,13 @@ function MegaMenu({
     }
   }
 
-  const menu = (
+  return (
     <div
-      className="fixed left-0 right-0 z-[9999] border-t-2 border-cyber-red shadow-2xl"
-      style={{ top: headerHeight }}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      className="fixed left-0 right-0 z-50 border-t-2 border-cyber-red shadow-2xl"
+      style={{ top: "var(--navbar-height, 96px)" }}
     >
       <div className="flex" style={{ height: 340 }}>
-        {/* Left sidebar — dark */}
+        {/* Left sidebar */}
         <div
           className="flex flex-col bg-[#1a1a2e] overflow-hidden"
           style={{ minWidth: 260, width: 260 }}
@@ -169,11 +157,6 @@ function MegaMenu({
             <button
               key={cat.id}
               onMouseEnter={() => setActiveCategory(cat)}
-              onClick={() => {
-                if (cat.links.length === 0) {
-                  handleLinkClick({ label: cat.label, to: cat.to });
-                }
-              }}
               className={`flex w-full items-center justify-between px-6 py-3.5 text-left text-sm font-medium transition-colors ${
                 activeCategory.id === cat.id
                   ? "bg-white text-gray-900"
@@ -188,9 +171,8 @@ function MegaMenu({
           ))}
         </div>
 
-        {/* Right panel — white */}
+        {/* Right panel */}
         <div className="flex flex-1 gap-16 bg-white px-10 py-7 overflow-hidden">
-          {/* Left col: category title + links */}
           <div style={{ minWidth: 240 }}>
             <button
               onClick={() =>
@@ -217,7 +199,6 @@ function MegaMenu({
             </ul>
           </div>
 
-          {/* Right col: Most requested */}
           <div style={{ minWidth: 240 }}>
             <ul className="space-y-3 mt-7">
               {activeCategory.mostRequested.map((link) => (
@@ -239,8 +220,6 @@ function MegaMenu({
       </div>
     </div>
   );
-
-  return createPortal(menu, document.body);
 }
 
 // ─── Mobile Menu ───────────────────────────────────────────────────────────
@@ -267,28 +246,18 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-white overflow-hidden">
-      {/* Header */}
       <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
         <button
-          onClick={() => {
-            onClose();
-            navigate("/");
-            window.scrollTo({ top: 0 });
-          }}
+          onClick={() => { onClose(); navigate("/"); window.scrollTo({ top: 0 }); }}
           aria-label="PSCyberCore home"
         >
           <img src={logo} alt="PSCyberCore" className="h-12 w-auto object-contain" />
         </button>
-        <button
-          onClick={onClose}
-          aria-label="Close menu"
-          className="rounded-md p-2 text-gray-600 hover:bg-gray-100"
-        >
+        <button onClick={onClose} aria-label="Close menu" className="rounded-md p-2 text-gray-600 hover:bg-gray-100">
           <X className="size-5" />
         </button>
       </div>
 
-      {/* Nav */}
       <nav className="flex-1 px-4 py-2 overflow-y-auto">
         {megaMenuCategories.map((cat) => (
           <div key={cat.id} className="border-b border-gray-100">
@@ -328,7 +297,6 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         ))}
       </nav>
 
-      {/* Bottom CTA */}
       <div className="border-t border-gray-200 px-4 py-4 space-y-2">
         <a
           href="tel:+18258076307"
@@ -353,16 +321,17 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
 export function Navbar() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [headerHeight, setHeaderHeight] = useState(80);
   const headerRef = useRef<HTMLElement>(null);
-  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigate = useNavigate();
 
-  // Keep header height in sync for mega menu positioning
+  // Update CSS var for mega menu top position
   useEffect(() => {
     function measure() {
       if (headerRef.current) {
-        setHeaderHeight(headerRef.current.offsetHeight);
+        document.documentElement.style.setProperty(
+          "--navbar-height",
+          `${headerRef.current.offsetHeight}px`
+        );
       }
     }
     measure();
@@ -370,36 +339,26 @@ export function Navbar() {
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  // Close mega menu on outside click
+  // Close on outside click
   useEffect(() => {
     if (!megaOpen) return;
-    function handleOutsideClick(e: MouseEvent) {
+    function onOutside(e: MouseEvent) {
       if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
         setMegaOpen(false);
       }
     }
-    document.addEventListener("mousedown", handleOutsideClick);
-    return () => document.removeEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("mousedown", onOutside);
+    return () => document.removeEventListener("mousedown", onOutside);
   }, [megaOpen]);
 
   // Close on Escape
   useEffect(() => {
-    function handleKey(e: KeyboardEvent) {
+    function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") setMegaOpen(false);
     }
-    document.addEventListener("keydown", handleKey);
-    return () => document.removeEventListener("keydown", handleKey);
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
   }, []);
-
-  // Hover handlers — same as GPS Roadlines
-  function handleMouseEnter() {
-    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-    setMegaOpen(true);
-  }
-
-  function handleMouseLeave() {
-    hoverTimeoutRef.current = setTimeout(() => setMegaOpen(false), 120);
-  }
 
   return (
     <>
@@ -413,10 +372,7 @@ export function Navbar() {
           <div className="flex flex-col items-center pt-1">
             {/* Logo */}
             <button
-              onClick={() => {
-                navigate("/");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
+              onClick={() => { navigate("/"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
               aria-label="PSCyberCore home"
             >
               <img
@@ -427,27 +383,23 @@ export function Navbar() {
               />
             </button>
 
-            {/* Desktop MENU button */}
+            {/* Desktop MENU — click only, no hover */}
             <button
               className={`hidden lg:flex w-full items-center justify-center gap-2 px-5 py-2 text-sm font-bold uppercase tracking-wide text-white transition-colors ${
                 megaOpen ? "bg-cyber-red/85" : "bg-cyber-red hover:bg-cyber-red/85"
               }`}
               aria-expanded={megaOpen}
               aria-haspopup="true"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
               onClick={() => setMegaOpen((v) => !v)}
             >
               <Menu className="size-4" />
               MENU
               <ChevronDown
-                className={`size-3.5 transition-transform duration-200 ${
-                  megaOpen ? "rotate-180" : ""
-                }`}
+                className={`size-3.5 transition-transform duration-200 ${megaOpen ? "rotate-180" : ""}`}
               />
             </button>
 
-            {/* Mobile MENU button */}
+            {/* Mobile MENU */}
             <button
               className="flex lg:hidden w-full items-center justify-center gap-2 bg-cyber-red px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-white"
               onClick={() => setMobileOpen(true)}
@@ -458,9 +410,8 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* Right — action buttons */}
+          {/* Right buttons */}
           <div className="flex shrink-0 items-center gap-2">
-            {/* Desktop */}
             <a
               href="tel:+18258076307"
               className="hidden lg:flex items-center gap-2 rounded-md border border-cyber-red px-4 py-2 text-sm font-semibold text-cyber-red hover:bg-cyber-red hover:text-white transition-colors"
@@ -469,16 +420,11 @@ export function Navbar() {
               +1 825 807 6307
             </a>
             <button
-              onClick={() => {
-                navigate("/book-consultation");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
+              onClick={() => { navigate("/book-consultation"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
               className="hidden lg:flex items-center gap-2 rounded-md bg-cyber-navy px-5 py-2 text-sm font-bold text-white hover:bg-cyber-navy/85 transition-colors"
             >
               Book Consultation
             </button>
-
-            {/* Mobile */}
             <a
               href="tel:+18258076307"
               className="flex lg:hidden items-center gap-1.5 rounded-md border border-cyber-red px-3 py-2 text-xs font-bold text-cyber-red whitespace-nowrap"
@@ -487,30 +433,19 @@ export function Navbar() {
               Call Us
             </a>
             <button
-              onClick={() => {
-                navigate("/book-consultation");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
+              onClick={() => { navigate("/book-consultation"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
               className="flex lg:hidden items-center gap-1.5 rounded-md bg-cyber-navy px-3 py-2 text-xs font-bold text-white whitespace-nowrap"
             >
               Consult
             </button>
           </div>
         </div>
+
+        {/* Mega menu inside header */}
+        {megaOpen && <MegaMenu onClose={() => setMegaOpen(false)} />}
       </header>
 
-      {/* Mega menu via portal — outside header DOM, hover-aware */}
-      {megaOpen && (
-        <MegaMenu
-          onClose={() => setMegaOpen(false)}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          headerHeight={headerHeight}
-        />
-      )}
-
-      {/* Spacer so page content doesn't hide under fixed header */}
-      <div style={{ height: headerHeight }} />
+      <div style={{ height: "var(--navbar-height, 96px)" }} />
     </>
   );
 }
