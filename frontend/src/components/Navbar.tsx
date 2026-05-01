@@ -379,9 +379,8 @@ export function Navbar() {
         setMegaOpen(false);
       }
     }
-    // Use capture phase so we get the event before anything else
-    document.addEventListener("mousedown", handleOutsideClick, true);
-    return () => document.removeEventListener("mousedown", handleOutsideClick, true);
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [megaOpen]);
 
   // Close on Escape
@@ -427,7 +426,6 @@ export function Navbar() {
               }`}
               aria-expanded={megaOpen}
               aria-haspopup="true"
-              onMouseEnter={() => setMegaOpen(true)}
               onClick={() => setMegaOpen((v) => !v)}
             >
               <Menu className="size-4" />
