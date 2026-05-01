@@ -383,7 +383,7 @@ export function Navbar() {
               onClick={() => { navigate("/"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
               aria-label="PSCyberCore home"
             >
-              <img src={logo} alt="PSCyberCore" className="h-24 w-auto object-contain transition-transform duration-300 hover:scale-105" />
+              <img src={logo} alt="PSCyberCore" className="h-16 w-auto object-contain transition-transform duration-300 hover:scale-105" style={{ transform: "scale(1.75)", transformOrigin: "center" }} />
             </button>
 
             {/* Desktop MENU button */}
