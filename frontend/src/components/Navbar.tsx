@@ -6,7 +6,7 @@ import {
   Phone,
   X,
 } from "lucide-react";
-import { useState, useRef, useEffect, type RefObject } from "react";
+import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import logo from "@/assets/logo.png";
 
@@ -120,15 +120,17 @@ const megaMenuCategories: MenuCategory[] = [
   },
 ];
 
-// ─── Mega Menu (rendered via Portal outside header) ────────────────────────
+// ─── Mega Menu ─────────────────────────────────────────────────────────────
 function MegaMenu({
   onClose,
+  onMouseEnter,
+  onMouseLeave,
   headerHeight,
-  menuRef,
 }: {
   onClose: () => void;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
   headerHeight: number;
-  menuRef: RefObject<HTMLDivElement | null>;
 }) {
   const [activeCategory, setActiveCategory] = useState<MenuCategory>(megaMenuCategories[0]);
   const navigate = useNavigate();
@@ -152,9 +154,10 @@ function MegaMenu({
 
   const menu = (
     <div
-      ref={menuRef}
       className="fixed left-0 right-0 z-[9999] border-t-2 border-cyber-red shadow-2xl"
       style={{ top: headerHeight }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className="flex" style={{ height: 340 }}>
         {/* Left sidebar — dark */}
@@ -352,8 +355,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(80);
   const headerRef = useRef<HTMLElement>(null);
-  const megaMenuRef = useRef<HTMLDivElement>(null);
-  const menuBtnRef = useRef<HTMLButtonElement>(null);
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigate = useNavigate();
 
   // Keep header height in sync for mega menu positioning
@@ -372,10 +374,7 @@ export function Navbar() {
   useEffect(() => {
     if (!megaOpen) return;
     function handleOutsideClick(e: MouseEvent) {
-      const target = e.target as Node;
-      const inHeader = headerRef.current?.contains(target);
-      const inMegaMenu = megaMenuRef.current?.contains(target);
-      if (!inHeader && !inMegaMenu) {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
         setMegaOpen(false);
       }
     }
@@ -391,6 +390,16 @@ export function Navbar() {
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
   }, []);
+
+  // Hover handlers — same as GPS Roadlines
+  function handleMouseEnter() {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    setMegaOpen(true);
+  }
+
+  function handleMouseLeave() {
+    hoverTimeoutRef.current = setTimeout(() => setMegaOpen(false), 120);
+  }
 
   return (
     <>
@@ -420,12 +429,13 @@ export function Navbar() {
 
             {/* Desktop MENU button */}
             <button
-              ref={menuBtnRef}
               className={`hidden lg:flex w-full items-center justify-center gap-2 px-5 py-2 text-sm font-bold uppercase tracking-wide text-white transition-colors ${
                 megaOpen ? "bg-cyber-red/85" : "bg-cyber-red hover:bg-cyber-red/85"
               }`}
               aria-expanded={megaOpen}
               aria-haspopup="true"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
               onClick={() => setMegaOpen((v) => !v)}
             >
               <Menu className="size-4" />
@@ -489,12 +499,13 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Mega menu rendered via portal — completely outside header DOM */}
+      {/* Mega menu via portal — outside header DOM, hover-aware */}
       {megaOpen && (
         <MegaMenu
           onClose={() => setMegaOpen(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           headerHeight={headerHeight}
-          menuRef={megaMenuRef}
         />
       )}
 
