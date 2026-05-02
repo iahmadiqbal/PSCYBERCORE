@@ -404,11 +404,12 @@ export function Navbar() {
           {/* Left — Logo stacked above MENU (both mobile & desktop) */}
           <div className="flex min-w-0 flex-col items-center">
 
-            <Link to="/" aria-label="PSCyberCore home">
+            <Link to="/" aria-label="PSCyberCore home" className="block" style={{ height: "5rem", width: "10rem" }}>
               <img
                 src={logo}
                 alt="PSCyberCore"
                 className="h-20 w-40 cursor-pointer object-contain transition-transform duration-300 hover:scale-105"
+                style={{ transform: "scale(1.75)", transformOrigin: "center", pointerEvents: "none" }}
                 aria-label="PSCyberCore home"
               />
             </Link>
